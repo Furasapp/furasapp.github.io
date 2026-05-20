@@ -94,11 +94,11 @@ nav .logo {
   align-items: center;
 }
 .logo-img {
-  height: 52px;
-  width: 52px;
-  max-width: 52px;
-  max-height: 52px;
-  border-radius: 12px;
+  height: 104px;
+  width: 104px;
+  max-width: 104px;
+  max-height: 104px;
+  border-radius: 20px;
   object-fit: cover;
   display: block;
 }
