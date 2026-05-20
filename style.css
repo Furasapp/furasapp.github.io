@@ -89,18 +89,27 @@ nav {
   justify-content: space-between;
 }
 nav .logo {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
   text-decoration: none;
-  display: flex;
-  align-items: center;
+  letter-spacing: -0.5px;
 }
-.logo-img {
-  height: 104px;
-  width: 104px;
-  max-width: 104px;
-  max-height: 104px;
-  border-radius: 20px;
+nav .logo span {
+  opacity: 0.55;
+  font-weight: 400;
+  font-size: 13px;
+  margin-right: 8px;
+}
+body.rtl nav .logo span { margin-right: 0; margin-left: 8px; }
+
+.hero-icon {
+  width: 96px;
+  height: 96px;
+  border-radius: 22px;
   object-fit: cover;
   display: block;
+  margin: 0 auto 20px;
 }
 
 .nav-right {
