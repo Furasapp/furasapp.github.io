@@ -96,8 +96,11 @@ nav .logo {
 .logo-img {
   height: 40px;
   width: 40px;
+  max-width: 40px;
+  max-height: 40px;
   border-radius: 10px;
   object-fit: cover;
+  display: block;
 }
 
 .nav-right {
