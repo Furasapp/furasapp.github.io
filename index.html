@@ -1,35 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Furas — Jobs at Arab-Owned Businesses</title>
-  <meta name="description" content="Furas connects workers with jobs at Arab-owned businesses across the United States. Browse listings, apply directly, and find your next opportunity." />
+  <title>Furas — Jobs at Yemeni-Owned Businesses</title>
+  <meta name="description" content="Furas connects workers with jobs at Yemeni-owned businesses across the United States. Browse listings, apply directly, and find your next opportunity." />
   <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231b3d29'/><text y='.9em' font-size='70' x='12'>🌙</text></svg>" />
 </head>
 <body>
 
+<!-- Language picker — shown on first visit -->
+<div id="lang-overlay" class="lang-overlay">
+  <div class="lang-picker">
+    <div class="lang-picker-logo">Furas <span>فرص</span></div>
+    <p class="lang-picker-sub">Choose your language<br>اختر لغتك</p>
+    <div class="lang-choices">
+      <button class="lang-choice-btn" onclick="setLang('en')">English</button>
+      <button class="lang-choice-btn" onclick="setLang('ar')">العربية</button>
+    </div>
+  </div>
+</div>
+
 <nav>
   <a class="logo" href="index.html">Furas <span>فرص</span></a>
-  <div class="nav-links">
-    <a href="privacy.html">Privacy</a>
-    <a href="terms.html">Terms</a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="privacy.html" data-i18n="navPrivacy">Privacy</a>
+      <a href="terms.html" data-i18n="navTerms">Terms</a>
+    </div>
+    <button class="lang-toggle" id="lang-toggle-btn" onclick="toggleLang()">عربي</button>
   </div>
 </nav>
 
 <section class="hero">
   <p class="tagline-ar">فرصة لكل يمني</p>
-  <h1>Jobs at Arab-Owned<br/><span>Businesses Near You</span></h1>
-  <p>Furas connects workers with jobs at Arab-owned businesses across the United States — in English and Arabic.</p>
+  <h1 data-i18n-html="heroTitle">Jobs at Yemeni-Owned<br/><span>Businesses Near You</span></h1>
+  <p data-i18n="heroSub">Furas connects workers with jobs at Yemeni-owned businesses across the United States — in English and Arabic.</p>
   <div class="badges">
-    <a class="badge" href="https://apps.apple.com/app/furas/id6745842285" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-      Download on App Store
+    <a class="badge badge-apple" href="https://apps.apple.com/app/furas/id6745842285" target="_blank" rel="noopener">
+      <svg class="badge-icon" viewBox="0 0 24 24" fill="white">
+        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+      </svg>
+      <div class="badge-text">
+        <span class="badge-line1" data-i18n="appLine1">Download on the</span>
+        <span class="badge-line2">App Store</span>
+      </div>
     </a>
-    <a class="badge" href="#" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.16.64.19.96.09l.09-.06 11.07-6.37-2.38-2.38-9.74 8.72zm15.48-9.44L16.2 12.9l2.49-2.49 2.43 1.39c.69.4.69 1.04 0 1.44l-2.46 1.08zM3.02.28C2.72.45 2.5.79 2.5 1.23v21.54c0 .43.22.77.52.94l.09.05 12.05-12.05L3.02.28zm12.24 11.33L4.17.59l10.99 6.34-2.38 2.38 2.48 2.3z"/></svg>
-      Get it on Google Play
+    <a class="badge badge-google" href="#" target="_blank" rel="noopener">
+      <svg class="badge-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3.18 23.76c.3.16.64.19.96.09l.09-.06 11.07-6.37-2.38-2.38-9.74 8.72z" fill="#EA4335"/>
+        <path d="M18.66 14.32L16.2 12.9l2.49-2.49 2.43 1.39c.69.4.69 1.04 0 1.44l-2.46 1.08z" fill="#FBBC04"/>
+        <path d="M3.02.28C2.72.45 2.5.79 2.5 1.23v21.54c0 .43.22.77.52.94l.09.05 12.05-12.05L3.02.28z" fill="#4285F4"/>
+        <path d="M15.26 11.61L4.17.59l10.99 6.34-2.38 2.38 2.48 2.3z" fill="#34A853"/>
+      </svg>
+      <div class="badge-text">
+        <span class="badge-line1" data-i18n="googleLine1">Get it on</span>
+        <span class="badge-line2">Google Play</span>
+      </div>
     </a>
   </div>
 </section>
@@ -37,44 +67,142 @@
 <section class="features">
   <div class="feature">
     <div class="icon">🏪</div>
-    <h3>Arab-Owned Businesses</h3>
-    <p>Every listing comes from an Arab-owned store, restaurant, deli, or business — businesses that speak your language.</p>
+    <h3 data-i18n="feat1Title">Yemeni-Owned Businesses</h3>
+    <p data-i18n="feat1Desc">Every listing comes from a Yemeni-owned store, restaurant, deli, or business — businesses that speak your language.</p>
   </div>
   <div class="feature">
     <div class="icon">🌙</div>
-    <h3>Arabic & English</h3>
-    <p>Full bilingual support. Browse and post jobs in English or Arabic — the app follows your preference.</p>
+    <h3 data-i18n="feat2Title">Arabic & English</h3>
+    <p data-i18n="feat2Desc">Full bilingual support. Browse and post jobs in English or Arabic — the app follows your preference.</p>
   </div>
   <div class="feature">
     <div class="icon">📍</div>
-    <h3>Local & Nationwide</h3>
-    <p>Find jobs near you with the map view, or browse listings across the United States from New York to Los Angeles.</p>
+    <h3 data-i18n="feat3Title">Local & Nationwide</h3>
+    <p data-i18n="feat3Desc">Find jobs near you with the map view, or browse listings across the United States from New York to Los Angeles.</p>
   </div>
   <div class="feature">
     <div class="icon">📞</div>
-    <h3>Direct Contact</h3>
-    <p>Reach employers directly via call or WhatsApp — no middleman, no applications portal, just direct connections.</p>
+    <h3 data-i18n="feat4Title">Direct Contact</h3>
+    <p data-i18n="feat4Desc">Reach employers directly via call or WhatsApp — no middleman, no applications portal, just direct connections.</p>
   </div>
   <div class="feature">
     <div class="icon">✅</div>
-    <h3>Free to Post</h3>
-    <p>Business owners can post jobs for free. Create an account with your phone number in under a minute.</p>
+    <h3 data-i18n="feat5Title">Free to Post</h3>
+    <p data-i18n="feat5Desc">Business owners can post jobs for free. Create an account with your phone number in under a minute.</p>
   </div>
   <div class="feature">
     <div class="icon">🔖</div>
-    <h3>Save Jobs</h3>
-    <p>Bookmark listings you like and come back to them anytime, even without an account.</p>
+    <h3 data-i18n="feat6Title">Save Jobs</h3>
+    <p data-i18n="feat6Desc">Bookmark listings you like and come back to them anytime, even without an account.</p>
   </div>
 </section>
 
 <footer>
   <div class="footer-links">
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="terms.html">Terms of Use</a>
-    <a href="mailto:support@furasapp.com">Contact Us</a>
+    <a href="privacy.html" data-i18n="footerPrivacy">Privacy Policy</a>
+    <a href="terms.html" data-i18n="footerTerms">Terms of Use</a>
+    <a href="mailto:support@furasapp.com" data-i18n="footerContact">Contact Us</a>
   </div>
-  <p class="copy">&copy; 2025 Furas. All rights reserved. &nbsp;·&nbsp; فرصة لكل يمني</p>
+  <p class="copy">&copy; 2025 Furas. <span data-i18n="allRights">All rights reserved.</span> &nbsp;·&nbsp; فرصة لكل يمني</p>
 </footer>
+
+<script>
+const strings = {
+  en: {
+    pageTitle: 'Furas — Jobs at Yemeni-Owned Businesses',
+    navPrivacy: 'Privacy',
+    navTerms: 'Terms',
+    langToggle: 'عربي',
+    heroTitle: 'Jobs at Yemeni-Owned<br/><span>Businesses Near You</span>',
+    heroSub: 'Furas connects workers with jobs at Yemeni-owned businesses across the United States — in English and Arabic.',
+    appLine1: 'Download on the',
+    googleLine1: 'Get it on',
+    feat1Title: 'Yemeni-Owned Businesses',
+    feat1Desc: 'Every listing comes from a Yemeni-owned store, restaurant, deli, or business — businesses that speak your language.',
+    feat2Title: 'Arabic & English',
+    feat2Desc: 'Full bilingual support. Browse and post jobs in English or Arabic — the app follows your preference.',
+    feat3Title: 'Local & Nationwide',
+    feat3Desc: 'Find jobs near you with the map view, or browse listings across the United States from New York to Los Angeles.',
+    feat4Title: 'Direct Contact',
+    feat4Desc: 'Reach employers directly via call or WhatsApp — no middleman, no applications portal, just direct connections.',
+    feat5Title: 'Free to Post',
+    feat5Desc: 'Business owners can post jobs for free. Create an account with your phone number in under a minute.',
+    feat6Title: 'Save Jobs',
+    feat6Desc: 'Bookmark listings you like and come back to them anytime, even without an account.',
+    footerPrivacy: 'Privacy Policy',
+    footerTerms: 'Terms of Use',
+    footerContact: 'Contact Us',
+    allRights: 'All rights reserved.',
+  },
+  ar: {
+    pageTitle: 'فرص — وظائف في محلات يمنية',
+    navPrivacy: 'الخصوصية',
+    navTerms: 'الشروط',
+    langToggle: 'English',
+    heroTitle: 'وظائف في محلات يمنية<br/><span>قريبة منك</span>',
+    heroSub: 'فرص يربط العمال بوظائف في محلات يمنية في جميع أنحاء الولايات المتحدة — بالإنجليزية والعربية.',
+    appLine1: 'حمّل من',
+    googleLine1: 'احصل عليه من',
+    feat1Title: 'محلات يمنية',
+    feat1Desc: 'كل إعلان من محل أو مطعم أو ديلي يمني — أعمال تتكلم لغتك.',
+    feat2Title: 'عربي وإنجليزي',
+    feat2Desc: 'دعم كامل للغتين. تصفح وانشر وظائف بالعربية أو الإنجليزية — التطبيق يتبع تفضيلك.',
+    feat3Title: 'محلي وعلى مستوى البلاد',
+    feat3Desc: 'ابحث عن وظائف قريبة منك بعرض الخريطة، أو تصفح إعلانات في جميع أنحاء الولايات المتحدة.',
+    feat4Title: 'تواصل مباشر',
+    feat4Desc: 'تواصل مع أصحاب العمل مباشرة عبر المكالمة أو واتساب — بلا وسيط.',
+    feat5Title: 'النشر مجاني',
+    feat5Desc: 'يمكن لأصحاب العمل نشر وظائف مجاناً. أنشئ حساباً برقم هاتفك في أقل من دقيقة.',
+    feat6Title: 'احفظ الوظائف',
+    feat6Desc: 'احفظ الإعلانات التي تعجبك وارجع إليها في أي وقت، حتى بدون حساب.',
+    footerPrivacy: 'سياسة الخصوصية',
+    footerTerms: 'شروط الاستخدام',
+    footerContact: 'تواصل معنا',
+    allRights: 'جميع الحقوق محفوظة.',
+  }
+};
+
+function applyLang(lang) {
+  const html = document.documentElement;
+  html.lang = lang;
+  html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.body.classList.toggle('rtl', lang === 'ar');
+  document.title = strings[lang].pageTitle;
+
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    const key = el.dataset.i18n;
+    if (strings[lang][key] !== undefined) el.textContent = strings[lang][key];
+  });
+
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+    const key = el.dataset.i18nHtml;
+    if (strings[lang][key] !== undefined) el.innerHTML = strings[lang][key];
+  });
+
+  document.getElementById('lang-toggle-btn').textContent = strings[lang].langToggle;
+  localStorage.setItem('furas-lang', lang);
+}
+
+function setLang(lang) {
+  document.getElementById('lang-overlay').style.display = 'none';
+  applyLang(lang);
+}
+
+function toggleLang() {
+  const current = localStorage.getItem('furas-lang') || 'en';
+  setLang(current === 'en' ? 'ar' : 'en');
+}
+
+(function() {
+  const saved = localStorage.getItem('furas-lang');
+  if (saved) {
+    document.getElementById('lang-overlay').style.display = 'none';
+    applyLang(saved);
+  } else {
+    document.getElementById('lang-overlay').style.display = 'flex';
+  }
+})();
+</script>
 
 </body>
 </html>
