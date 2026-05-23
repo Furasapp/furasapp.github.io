@@ -28,8 +28,8 @@
   <a class="logo" href="index.html"></a>
   <div class="nav-right">
     <div class="nav-links">
-      <a href="privacy.html" data-i18n="navPrivacy">Privacy</a>
-      <a href="terms.html" data-i18n="navTerms">Terms</a>
+      <a href="privacy.html" data-i18n="navPrivacy" data-href-en="privacy.html" data-href-ar="privacy-ar.html">Privacy</a>
+      <a href="terms.html" data-i18n="navTerms" data-href-en="terms.html" data-href-ar="terms-ar.html">Terms</a>
     </div>
     <button class="lang-toggle" id="lang-toggle-btn" onclick="toggleLang()">عربي</button>
   </div>
@@ -100,8 +100,8 @@
 
 <footer>
   <div class="footer-links">
-    <a href="privacy.html" data-i18n="footerPrivacy">Privacy Policy</a>
-    <a href="terms.html" data-i18n="footerTerms">Terms of Use</a>
+    <a href="privacy.html" data-i18n="footerPrivacy" data-href-en="privacy.html" data-href-ar="privacy-ar.html">Privacy Policy</a>
+    <a href="terms.html" data-i18n="footerTerms" data-href-en="terms.html" data-href-ar="terms-ar.html">Terms of Use</a>
     <a href="mailto:support@furasapp.com" data-i18n="footerContact">Contact Us</a>
   </div>
   <p class="copy">&copy; 2025 Furas. <span data-i18n="allRights">All rights reserved.</span> &nbsp;·&nbsp; فرصة لكل يمني</p>
@@ -173,6 +173,9 @@ function applyLang(lang) {
   document.querySelectorAll('[data-i18n]').forEach(function(el) {
     const key = el.dataset.i18n;
     if (strings[lang][key] !== undefined) el.textContent = strings[lang][key];
+    if (el.dataset['href' + (lang === 'ar' ? 'Ar' : 'En')]) {
+      el.href = el.dataset['href' + (lang === 'ar' ? 'Ar' : 'En')];
+    }
   });
 
   document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
