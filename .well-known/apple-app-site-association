@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "3C3J69JTFZ.com.furasapp.furas",
+        "paths": ["/jobs/*"]
+      }
+    ]
+  }
+}

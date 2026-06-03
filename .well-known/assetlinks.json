@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.yourname.localhire",
+      "sha256_cert_fingerprints": [
+        "EF:36:24:5D:EA:2A:1C:04:0C:24:91:F7:F4:8A:8A:77:9B:06:01:54:95:2F:7B:52:0E:62:0B:5D:2F:D2:47:BF"
+      ]
+    }
+  }
+]
