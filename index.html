@@ -28,10 +28,6 @@
 <nav>
   <a class="logo" href="index.html"></a>
   <div class="nav-right">
-    <div class="nav-links">
-      <a href="privacy.html" data-i18n="navPrivacy" data-href-en="privacy.html" data-href-ar="privacy-ar.html">Privacy</a>
-      <a href="terms.html" data-i18n="navTerms" data-href-en="terms.html" data-href-ar="terms-ar.html">Terms</a>
-    </div>
     <button class="lang-toggle" id="lang-toggle-btn" onclick="toggleLang()">عربي</button>
   </div>
 </nav>
@@ -101,7 +97,7 @@
 
 <footer>
   <div class="footer-links">
-    <a href="delete-account.html">Delete Account</a>
+    <a href="delete-account.html" data-i18n="footerDeleteAccount">Delete Account</a>
     <a href="privacy.html" data-i18n="footerPrivacy" data-href-en="privacy.html" data-href-ar="privacy-ar.html">Privacy Policy</a>
     <a href="terms.html" data-i18n="footerTerms" data-href-en="terms.html" data-href-ar="terms-ar.html">Terms of Use</a>
     <a href="mailto:support@furasapp.com" data-i18n="footerContact">Contact Us</a>
@@ -113,8 +109,6 @@
 const strings = {
   en: {
     pageTitle: 'Furas — Jobs at Yemeni & Arab-Owned Businesses',
-    navPrivacy: 'Privacy',
-    navTerms: 'Terms',
     langToggle: 'عربي',
     heroTitle: 'Find Work or Hire —<br/><span>All in One App</span>',
     heroSub: 'Furas is the app for Yemeni & Arab workers looking for jobs and business owners looking to hire — in English and Arabic, across the United States.',
@@ -133,6 +127,7 @@ const strings = {
     feat5Desc: 'Owners post jobs for free in under a minute. Workers browse all listings for free — no account needed.',
     feat6Title: 'Save & Manage',
     feat6Desc: 'Workers bookmark listings to revisit later. Owners manage, edit, and repost their listings from the dashboard.',
+    footerDeleteAccount: 'Delete Account',
     footerPrivacy: 'Privacy Policy',
     footerTerms: 'Terms of Use',
     footerContact: 'Contact Us',
@@ -140,8 +135,6 @@ const strings = {
   },
   ar: {
     pageTitle: 'فُرص — أعمال في محلات يمنية وعربية',
-    navPrivacy: 'الخصوصية',
-    navTerms: 'الشروط',
     langToggle: 'English',
     heroTitle: 'ابحث عن عمل أو عامل —<br/><span>كله في تطبيق واحد</span>',
     heroSub: 'فُرص هو التطبيق للعمال اليمنيين والعرب الباحثين عن عمل ولأصحاب المحلات الباحثين عن عمال — بالعربية والإنجليزية، في جميع أنحاء الولايات المتحدة.',
@@ -160,6 +153,7 @@ const strings = {
     feat5Desc: 'أصحاب المحلات ينشرون أعمالاً مجاناً في أقل من دقيقة. العمال يتصفحون كل المنشورات مجاناً بدون حساب.',
     feat6Title: 'احفظ وأدِر',
     feat6Desc: 'العمال يحفظون المنشورات للرجوع إليها لاحقاً. أصحاب المحلات يديرون ويعدّلون منشوراتهم من لوحة التحكم.',
+    footerDeleteAccount: 'حذف الحساب',
     footerPrivacy: 'سياسة الخصوصية',
     footerTerms: 'شروط الاستخدام',
     footerContact: 'تواصل معنا',
