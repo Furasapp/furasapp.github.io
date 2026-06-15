@@ -41,19 +41,6 @@ body.rtl {
   width: 100%;
   max-width: 340px;
 }
-.lang-picker-logo {
-  font-size: 26px;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 6px;
-  letter-spacing: -0.5px;
-}
-.lang-picker-logo span {
-  opacity: 0.55;
-  font-weight: 400;
-  font-size: 26px;
-  margin-right: 6px;
-}
 .lang-picker-sub {
   color: rgba(255, 255, 255, 0.65);
   font-size: 15px;
