@@ -10,6 +10,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231b3d29'/><text y='.9em' font-size='70' x='12'>🌙</text></svg>" />
   <meta name="apple-itunes-app" content="app-id=6769409699" />
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2056432011960750');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2056432011960750&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -203,6 +221,50 @@ function toggleLang() {
     document.getElementById('lang-overlay').style.display = 'flex';
   }
 })();
+
+// Meta Conversions API mirror (server-side dedup of Pixel events)
+const CAPI_FN_URL = 'https://zbzhilbhkaizrxtdxpue.supabase.co/functions/v1/meta-capi-event';
+const CAPI_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpiemhpbGJoa2FpenJ4dGR4cHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MzMxODIsImV4cCI6MjA5NDEwOTE4Mn0.Y4RxP1vOifP6T_Qj64JvpmUho1A1nSyJqy-lBc1EH4o';
+
+function fbEventId() {
+  return 'evt_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+}
+
+function getCookie(name) {
+  const match = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+  return match ? match.pop() : '';
+}
+
+function sendCapiEvent(eventName, eventId) {
+  fetch(CAPI_FN_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + CAPI_ANON_KEY,
+      'apikey': CAPI_ANON_KEY,
+    },
+    body: JSON.stringify({
+      event_name: eventName,
+      event_id: eventId,
+      event_source_url: window.location.href,
+      fbp: getCookie('_fbp'),
+      fbc: getCookie('_fbc'),
+    }),
+  }).catch(function() {});
+}
+
+const viewEventId = fbEventId();
+fbq('track', 'ViewContent', {}, { eventID: viewEventId });
+sendCapiEvent('ViewContent', viewEventId);
+
+const appStoreBadge = document.querySelector('.badge-apple');
+if (appStoreBadge) {
+  appStoreBadge.addEventListener('click', function() {
+    const leadEventId = fbEventId();
+    fbq('track', 'Lead', {}, { eventID: leadEventId });
+    sendCapiEvent('Lead', leadEventId);
+  });
+}
 </script>
 
 </body>
