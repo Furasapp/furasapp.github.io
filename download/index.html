@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Download Furas</title>
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2056432011960750');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2056432011960750&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #1b3d29;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .msg {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 17px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="msg">Opening store…</div>
+
+  <script>
+  const CAPI_FN_URL = 'https://zbzhilbhkaizrxtdxpue.supabase.co/functions/v1/meta-capi-event';
+  const CAPI_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpiemhpbGJoa2FpenJ4dGR4cHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MzMxODIsImV4cCI6MjA5NDEwOTE4Mn0.Y4RxP1vOifP6T_Qj64JvpmUho1A1nSyJqy-lBc1EH4o';
+
+  const IOS_URL   = 'https://apps.apple.com/us/app/furas-%D9%81-%D8%B1%D8%B5/id6769409699';
+  const ANDROID_URL = 'https://play.google.com/store/apps/details?id=com.yourname.localhire';
+
+  function fbEventId() {
+    return 'evt_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+  }
+
+  function getCookie(name) {
+    var match = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return match ? match.pop() : '';
+  }
+
+  function sendCapiEvent(eventName, eventId) {
+    fetch(CAPI_FN_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + CAPI_ANON_KEY,
+        'apikey': CAPI_ANON_KEY,
+      },
+      body: JSON.stringify({
+        event_name: eventName,
+        event_id: eventId,
+        event_source_url: window.location.href,
+        fbp: getCookie('_fbp'),
+        fbc: getCookie('_fbc'),
+      }),
+    }).catch(function() {});
+  }
+
+  var leadId = fbEventId();
+  fbq('track', 'Lead', {}, { eventID: leadId });
+  sendCapiEvent('Lead', leadId);
+
+  var ua = navigator.userAgent;
+  var dest = /android/i.test(ua) ? ANDROID_URL : IOS_URL;
+
+  setTimeout(function() {
+    window.location.replace(dest);
+  }, 350);
+  </script>
+</body>
+</html>
