@@ -62,6 +62,7 @@
   function sendCapiEvent(eventName, eventId) {
     fetch(CAPI_FN_URL, {
       method: 'POST',
+      keepalive: true,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + CAPI_ANON_KEY,
@@ -84,9 +85,10 @@
   var ua = navigator.userAgent;
   var dest = /android/i.test(ua) ? ANDROID_URL : IOS_URL;
 
+  // 1000ms gives fbevents.js time to load and fire on slow mobile connections
   setTimeout(function() {
     window.location.replace(dest);
-  }, 350);
+  }, 1000);
   </script>
 </body>
 </html>
