@@ -77,18 +77,48 @@
       direction: rtl;
       margin-bottom: 28px;
     }
-    .ios-link {
-      display: inline-block;
-      margin-top: 8px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
+    .notify-form { margin-top: 4px; }
+    .notify-input {
+      width: 100%;
+      padding: 13px 16px;
       border-radius: 12px;
-      padding: 12px 24px;
-      color: rgba(255,255,255,0.8);
-      text-decoration: none;
-      font-size: 13px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      margin-bottom: 10px;
+      text-align: center;
     }
-    .ios-link:hover { background: rgba(255,255,255,0.15); }
+    .notify-input::placeholder { color: rgba(255,255,255,0.4); }
+    .notify-input:focus { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.12); }
+    .notify-btn {
+      width: 100%;
+      padding: 13px;
+      border-radius: 12px;
+      border: none;
+      background: #fff;
+      color: #1b3d29;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .notify-btn:disabled { opacity: 0.6; cursor: default; }
+    .notify-success {
+      color: #a8d5b5;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 12px 0 4px;
+    }
+    .site-link {
+      display: block;
+      margin-top: 24px;
+      color: rgba(255,255,255,0.4);
+      font-size: 13px;
+      text-decoration: none;
+      letter-spacing: 0.3px;
+    }
+    .site-link:hover { color: rgba(255,255,255,0.65); }
     .redirecting {
       color: rgba(255,255,255,0.75);
       font-size: 17px;
@@ -106,9 +136,14 @@
     <div class="divider"></div>
     <div class="sub-en">We're putting the finishing touches on the Android version. It'll be available very soon.</div>
     <div class="sub-ar">نعمل على إتمام نسخة أندرويد وستكون متاحة قريباً جداً.</div>
-    <a class="ios-link" href="https://apps.apple.com/us/app/furas-%D9%81-%D8%B1%D8%B5/id6769409699">
-      Have an iPhone? Download now &nbsp;↗
-    </a>
+    <div class="notify-form">
+      <input class="notify-input" id="notify-input" type="text" placeholder="Phone or email / رقمك أو بريدك" />
+      <button class="notify-btn" id="notify-btn" onclick="submitNotify()">Notify Me · أخبرني</button>
+      <div class="notify-success" id="notify-success" style="display:none">
+        ✓ Got it! We'll let you know. · تمام، سنخبرك!
+      </div>
+    </div>
+    <a class="site-link" href="https://furasapp.com">furasapp.com</a>
   </div>
 
   <script>
@@ -142,6 +177,29 @@
         fbc: getCookie('_fbc'),
       }),
     }).catch(function() {});
+  }
+
+  function submitNotify() {
+    var input = document.getElementById('notify-input');
+    var btn = document.getElementById('notify-btn');
+    var success = document.getElementById('notify-success');
+    var contact = input.value.trim();
+    if (!contact) return;
+    btn.disabled = true;
+    fetch('https://zbzhilbhkaizrxtdxpue.supabase.co/rest/v1/android_waitlist', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + CAPI_ANON_KEY,
+        'apikey': CAPI_ANON_KEY,
+        'Prefer': 'return=minimal',
+      },
+      body: JSON.stringify({ contact: contact }),
+    }).catch(function() {}).finally(function() {
+      input.style.display = 'none';
+      btn.style.display = 'none';
+      success.style.display = 'block';
+    });
   }
 
   var isAndroid = /android/i.test(navigator.userAgent);
