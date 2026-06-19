@@ -77,6 +77,13 @@
       direction: rtl;
       margin-bottom: 28px;
     }
+    .notify-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .notify-label span { display: block; }
     .notify-form { margin-top: 4px; }
     .notify-input {
       width: 100%;
@@ -111,14 +118,20 @@
       padding: 12px 0 4px;
     }
     .site-link {
-      display: block;
-      margin-top: 24px;
-      color: rgba(255,255,255,0.4);
-      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+      font-weight: 600;
       text-decoration: none;
-      letter-spacing: 0.3px;
     }
-    .site-link:hover { color: rgba(255,255,255,0.65); }
+    .site-link:hover { background: rgba(255,255,255,0.06); color: #fff; }
     .redirecting {
       color: rgba(255,255,255,0.75);
       font-size: 17px;
@@ -136,14 +149,21 @@
     <div class="divider"></div>
     <div class="sub-en">We're putting the finishing touches on the Android version. It'll be available very soon.</div>
     <div class="sub-ar">نعمل على إتمام نسخة أندرويد وستكون متاحة قريباً جداً.</div>
+    <div class="notify-label">
+      <span>Want to be notified when it's ready?</span>
+      <span style="direction:rtl">تريد إشعاراً عند الإطلاق؟</span>
+    </div>
     <div class="notify-form">
-      <input class="notify-input" id="notify-input" type="text" placeholder="Phone or email / رقمك أو بريدك" />
+      <input class="notify-input" id="notify-input" type="text" placeholder="Phone or email · رقمك أو بريدك" />
       <button class="notify-btn" id="notify-btn" onclick="submitNotify()">Notify Me · أخبرني</button>
       <div class="notify-success" id="notify-success" style="display:none">
         ✓ Got it! We'll let you know. · تمام، سنخبرك!
       </div>
     </div>
-    <a class="site-link" href="https://furasapp.com">furasapp.com</a>
+    <a class="site-link" href="https://furasapp.com">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      furasapp.com
+    </a>
   </div>
 
   <script>
