@@ -30,25 +30,91 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      padding: 24px;
     }
-    .msg {
-      color: rgba(255, 255, 255, 0.75);
+    .card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 40px 32px;
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+    }
+    .emoji { font-size: 52px; margin-bottom: 20px; display: block; }
+    .title-en {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .title-ar {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 20px;
+      direction: rtl;
+    }
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: rgba(255,255,255,0.2);
+      margin: 0 auto 20px;
+      border-radius: 2px;
+    }
+    .sub-en {
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    .sub-ar {
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.6;
+      direction: rtl;
+      margin-bottom: 28px;
+    }
+    .ios-link {
+      display: inline-block;
+      margin-top: 8px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      padding: 12px 24px;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 13px;
+    }
+    .ios-link:hover { background: rgba(255,255,255,0.15); }
+    .redirecting {
+      color: rgba(255,255,255,0.75);
       font-size: 17px;
       text-align: center;
     }
   </style>
 </head>
 <body>
-  <div class="msg">Opening store…</div>
+  <div id="ios-msg" class="redirecting" style="display:none">Opening App Store…</div>
+
+  <div id="android-msg" class="card" style="display:none">
+    <span class="emoji">🤖</span>
+    <div class="title-en">Android Coming Soon</div>
+    <div class="title-ar">قريباً على أندرويد</div>
+    <div class="divider"></div>
+    <div class="sub-en">We're putting the finishing touches on the Android version. It'll be available very soon.</div>
+    <div class="sub-ar">نعمل على إتمام نسخة أندرويد وستكون متاحة قريباً جداً.</div>
+    <a class="ios-link" href="https://apps.apple.com/us/app/furas-%D9%81-%D8%B1%D8%B5/id6769409699">
+      Have an iPhone? Download now &nbsp;↗
+    </a>
+  </div>
 
   <script>
   const CAPI_FN_URL = 'https://zbzhilbhkaizrxtdxpue.supabase.co/functions/v1/meta-capi-event';
   const CAPI_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpiemhpbGJoa2FpenJ4dGR4cHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MzMxODIsImV4cCI6MjA5NDEwOTE4Mn0.Y4RxP1vOifP6T_Qj64JvpmUho1A1nSyJqy-lBc1EH4o';
-
-  const IOS_URL   = 'https://apps.apple.com/us/app/furas-%D9%81-%D8%B1%D8%B5/id6769409699';
-  const ANDROID_URL = 'https://play.google.com/store/apps/details?id=com.yourname.localhire';
+  const IOS_URL = 'https://apps.apple.com/us/app/furas-%D9%81-%D8%B1%D8%B5/id6769409699';
 
   function fbEventId() {
     return 'evt_' + Date.now() + '_' + Math.random().toString(36).slice(2);
@@ -78,17 +144,21 @@
     }).catch(function() {});
   }
 
-  var leadId = fbEventId();
-  fbq('track', 'Lead', {}, { eventID: leadId });
-  sendCapiEvent('Lead', leadId);
+  var isAndroid = /android/i.test(navigator.userAgent);
 
-  var ua = navigator.userAgent;
-  var dest = /android/i.test(ua) ? ANDROID_URL : IOS_URL;
+  if (isAndroid) {
+    document.getElementById('android-msg').style.display = 'block';
+  } else {
+    document.getElementById('ios-msg').style.display = 'block';
 
-  // 1000ms gives fbevents.js time to load and fire on slow mobile connections
-  setTimeout(function() {
-    window.location.replace(dest);
-  }, 1000);
+    var leadId = fbEventId();
+    fbq('track', 'Lead', {}, { eventID: leadId });
+    sendCapiEvent('Lead', leadId);
+
+    setTimeout(function() {
+      window.location.replace(IOS_URL);
+    }, 1000);
+  }
   </script>
 </body>
 </html>
