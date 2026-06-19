@@ -113,6 +113,8 @@
     }
     .notify-input::placeholder { color: rgba(255,255,255,0.3); }
     .notify-input:focus { border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.1); }
+    .input-error { border-color: #f87171 !important; }
+    .error-msg { font-size: 13px; color: #f87171; margin-bottom: 10px; }
     .notify-btn {
       width: 100%;
       padding: 15px;
@@ -190,7 +192,8 @@
     <div class="form-label">Get notified · احصل على إشعار</div>
 
     <div id="form-wrap">
-      <input class="notify-input" id="notify-input" type="text" placeholder="Phone number or email" />
+      <input class="notify-input" id="notify-input" type="text" placeholder="Phone number or email" oninput="clearError()" />
+      <div class="error-msg" id="input-error" style="display:none"></div>
       <button class="notify-btn" id="notify-btn" onclick="submitNotify()">Notify Me &nbsp;·&nbsp; أخبرني</button>
     </div>
 
@@ -201,7 +204,7 @@
 
     <a class="footer-link" href="https://www.facebook.com/share/1Db6tE1n94/?mibextid=wwXIfr" target="_blank" rel="noopener">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-      Follow for updates · تابعنا للمستجدات
+      Follow us on Facebook · تابعونا على فيسبوك
     </a>
   </div>
 
@@ -221,13 +224,34 @@
     }).catch(function(){});
   }
 
+  function clearError() {
+    var input = document.getElementById('notify-input');
+    var err   = document.getElementById('input-error');
+    input.classList.remove('input-error');
+    err.style.display = 'none';
+  }
+
   function submitNotify() {
     var input   = document.getElementById('notify-input');
     var btn     = document.getElementById('notify-btn');
     var wrap    = document.getElementById('form-wrap');
     var success = document.getElementById('notify-success');
+    var err     = document.getElementById('input-error');
     var contact = input.value.trim();
     if (!contact) { input.focus(); return; }
+
+    // Phone validation: if no @ sign, treat as phone and check digit count
+    if (!contact.includes('@')) {
+      var digits = contact.replace(/\D/g, '');
+      if (digits.length < 10) {
+        input.classList.add('input-error');
+        err.textContent = 'Please enter a valid 10-digit phone number · أدخل رقماً صحيحاً مكوناً من 10 أرقام';
+        err.style.display = 'block';
+        input.focus();
+        return;
+      }
+    }
+
     btn.disabled = true;
     btn.textContent = '…';
     fetch('https://zbzhilbhkaizrxtdxpue.supabase.co/rest/v1/android_waitlist', {
