@@ -275,13 +275,16 @@
   }
 
   var isAndroid = /android/i.test(navigator.userAgent);
-  if (isAndroid) {
+  var fromHome  = window.location.search.indexOf('ref=home') !== -1;
+
+  if (isAndroid || fromHome) {
     document.getElementById('android-msg').style.display = 'block';
   } else {
     document.getElementById('ios-msg').style.display = 'block';
     var leadId = fbEventId();
     fbq('track', 'Lead', {}, { eventID: leadId });
     sendCapiEvent('Lead', leadId);
+    setTimeout(function() { window.location.replace(IOS_URL); }, 1000);
   }
   </script>
 </body>
