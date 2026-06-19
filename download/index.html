@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Download Furas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
 
   <!-- Meta Pixel Code -->
   <script>
@@ -27,215 +29,225 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background: #1b3d29;
+      min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      padding: 24px;
+      font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
+      padding: 32px 24px;
     }
-    .card {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 24px;
-      padding: 40px 32px;
-      max-width: 360px;
-      width: 100%;
-      text-align: center;
+
+    /* ── Android page ── */
+    .android-wrap { max-width: 380px; width: 100%; text-align: center; }
+
+    .app-icon {
+      width: 88px;
+      height: 88px;
+      border-radius: 22px;
+      margin: 0 auto 24px;
+      display: block;
     }
-    .emoji { font-size: 52px; margin-bottom: 20px; display: block; }
-    .title-en {
-      font-size: 22px;
-      font-weight: 700;
+
+    .badge-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 100px;
+      padding: 6px 14px;
+      margin-bottom: 20px;
+    }
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #f59e0b; }
+    .badge-text { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.8); letter-spacing: 0.5px; text-transform: uppercase; }
+
+    .title {
+      font-size: 28px;
+      font-weight: 800;
       color: #fff;
-      margin-bottom: 6px;
+      line-height: 1.2;
+      margin-bottom: 8px;
     }
     .title-ar {
-      font-size: 20px;
-      font-weight: 700;
-      color: #fff;
+      font-size: 24px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.85);
       margin-bottom: 20px;
       direction: rtl;
     }
-    .divider {
-      width: 40px;
-      height: 2px;
-      background: rgba(255,255,255,0.2);
-      margin: 0 auto 20px;
-      border-radius: 2px;
+    .desc {
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.65;
+      margin-bottom: 6px;
     }
-    .sub-en {
-      font-size: 14px;
-      color: rgba(255,255,255,0.65);
-      line-height: 1.6;
+    .desc-ar {
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.65;
+      direction: rtl;
+      margin-bottom: 36px;
+    }
+
+    /* ── Notify form ── */
+    .form-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
       margin-bottom: 10px;
     }
-    .sub-ar {
-      font-size: 14px;
-      color: rgba(255,255,255,0.65);
-      line-height: 1.6;
-      direction: rtl;
-      margin-bottom: 28px;
-    }
-    .notify-label {
-      font-size: 13px;
-      color: rgba(255,255,255,0.55);
-      margin-bottom: 12px;
-      line-height: 1.5;
-    }
-    .notify-label span { display: block; }
-    .notify-form { margin-top: 4px; }
     .notify-input {
       width: 100%;
-      padding: 13px 16px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.2);
-      background: rgba(255,255,255,0.08);
+      padding: 15px 18px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.07);
       color: #fff;
-      font-size: 15px;
+      font-size: 16px;
+      font-family: inherit;
       outline: none;
       margin-bottom: 10px;
       text-align: center;
     }
-    .notify-input::placeholder { color: rgba(255,255,255,0.4); }
-    .notify-input:focus { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.12); }
+    .notify-input::placeholder { color: rgba(255,255,255,0.3); }
+    .notify-input:focus { border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.1); }
     .notify-btn {
       width: 100%;
-      padding: 13px;
-      border-radius: 12px;
+      padding: 15px;
+      border-radius: 14px;
       border: none;
       background: #fff;
       color: #1b3d29;
-      font-size: 15px;
-      font-weight: 700;
+      font-size: 16px;
+      font-weight: 800;
+      font-family: inherit;
       cursor: pointer;
+      transition: opacity 0.15s;
     }
-    .notify-btn:disabled { opacity: 0.6; cursor: default; }
-    .notify-success {
+    .notify-btn:hover { opacity: 0.92; }
+    .notify-btn:disabled { opacity: 0.5; cursor: default; }
+    .success-msg {
+      margin-top: 16px;
+      padding: 16px;
+      background: rgba(168,213,181,0.12);
+      border: 1px solid rgba(168,213,181,0.25);
+      border-radius: 14px;
       color: #a8d5b5;
       font-size: 15px;
       font-weight: 600;
-      padding: 12px 0 4px;
+      line-height: 1.6;
     }
-    .site-link {
-      display: flex;
+
+    /* ── Footer link ── */
+    .footer-link {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 20px;
-      padding: 12px 20px;
-      border-radius: 12px;
+      gap: 6px;
+      margin-top: 36px;
+      padding: 10px 20px;
+      border-radius: 100px;
       border: 1px solid rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.7);
-      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      font-size: 13px;
       font-weight: 600;
       text-decoration: none;
+      transition: all 0.15s;
     }
-    .site-link:hover { background: rgba(255,255,255,0.06); color: #fff; }
-    .redirecting {
-      color: rgba(255,255,255,0.75);
+    .footer-link:hover { border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.8); }
+
+    /* ── iOS redirect ── */
+    .ios-wrap {
+      color: rgba(255,255,255,0.7);
       font-size: 17px;
       text-align: center;
     }
   </style>
 </head>
 <body>
-  <div id="ios-msg" class="redirecting" style="display:none">Opening App Store…</div>
 
-  <div id="android-msg" class="card" style="display:none">
-    <span class="emoji">🤖</span>
-    <div class="title-en">Android Coming Soon</div>
-    <div class="title-ar">قريباً على أندرويد</div>
-    <div class="divider"></div>
-    <div class="sub-en">We're putting the finishing touches on the Android version. It'll be available very soon.</div>
-    <div class="sub-ar">نعمل على إتمام نسخة أندرويد وستكون متاحة قريباً جداً.</div>
-    <div class="notify-label">
-      <span>Want to be notified when it's ready?</span>
-      <span style="direction:rtl">تريد إشعاراً عند الإطلاق؟</span>
+  <!-- iOS: just a redirect message -->
+  <div class="ios-wrap" id="ios-msg" style="display:none">Opening App Store…</div>
+
+  <!-- Android: coming soon page -->
+  <div class="android-wrap" id="android-msg" style="display:none">
+
+    <img class="app-icon" src="https://furasapp.com/icon.png" alt="Furas" onerror="this.style.display='none'" />
+
+    <div class="badge-row">
+      <div class="badge-dot"></div>
+      <span class="badge-text">Coming Soon on Android</span>
     </div>
-    <div class="notify-form">
-      <input class="notify-input" id="notify-input" type="text" placeholder="Phone or email · رقمك أو بريدك" />
-      <button class="notify-btn" id="notify-btn" onclick="submitNotify()">Notify Me · أخبرني</button>
-      <div class="notify-success" id="notify-success" style="display:none">
-        ✓ Got it! We'll let you know. · تمام، سنخبرك!
-      </div>
+
+    <div class="title">Furas is on its way<br>to Android</div>
+    <div class="title-ar">فُرص قادمة على أندرويد</div>
+
+    <div class="desc">We're almost there. Leave your phone number or email and we'll notify you the moment it launches.</div>
+    <div class="desc-ar">اتركنا رقمك أو بريدك وسنخبرك فور الإطلاق.</div>
+
+    <div class="form-label">Get notified · احصل على إشعار</div>
+
+    <div id="form-wrap">
+      <input class="notify-input" id="notify-input" type="text" placeholder="Phone number or email" />
+      <button class="notify-btn" id="notify-btn" onclick="submitNotify()">Notify Me &nbsp;·&nbsp; أخبرني</button>
     </div>
-    <a class="site-link" href="https://furasapp.com">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+
+    <div class="success-msg" id="notify-success" style="display:none">
+      ✓ You're on the list!<br>
+      <span style="direction:rtl;display:block">تمام! سنخبرك عند الإطلاق.</span>
+    </div>
+
+    <a class="footer-link" href="https://furasapp.com">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       furasapp.com
     </a>
   </div>
 
   <script>
-  const CAPI_FN_URL = 'https://zbzhilbhkaizrxtdxpue.supabase.co/functions/v1/meta-capi-event';
+  const CAPI_FN_URL  = 'https://zbzhilbhkaizrxtdxpue.supabase.co/functions/v1/meta-capi-event';
   const CAPI_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpiemhpbGJoa2FpenJ4dGR4cHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MzMxODIsImV4cCI6MjA5NDEwOTE4Mn0.Y4RxP1vOifP6T_Qj64JvpmUho1A1nSyJqy-lBc1EH4o';
-  const IOS_URL = 'https://apps.apple.com/us/app/furas-%D9%81-%D8%B1%D8%B5/id6769409699';
+  const IOS_URL       = 'https://apps.apple.com/us/app/furas-%D9%81-%D8%B1%D8%B5/id6769409699';
 
-  function fbEventId() {
-    return 'evt_' + Date.now() + '_' + Math.random().toString(36).slice(2);
-  }
-
-  function getCookie(name) {
-    var match = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
-    return match ? match.pop() : '';
-  }
+  function fbEventId() { return 'evt_' + Date.now() + '_' + Math.random().toString(36).slice(2); }
+  function getCookie(n) { var m = document.cookie.match('(^|;)\\s*' + n + '\\s*=\\s*([^;]+)'); return m ? m.pop() : ''; }
 
   function sendCapiEvent(eventName, eventId) {
     fetch(CAPI_FN_URL, {
-      method: 'POST',
-      keepalive: true,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + CAPI_ANON_KEY,
-        'apikey': CAPI_ANON_KEY,
-      },
-      body: JSON.stringify({
-        event_name: eventName,
-        event_id: eventId,
-        event_source_url: window.location.href,
-        fbp: getCookie('_fbp'),
-        fbc: getCookie('_fbc'),
-      }),
-    }).catch(function() {});
+      method: 'POST', keepalive: true,
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + CAPI_ANON_KEY, 'apikey': CAPI_ANON_KEY },
+      body: JSON.stringify({ event_name: eventName, event_id: eventId, event_source_url: window.location.href, fbp: getCookie('_fbp'), fbc: getCookie('_fbc') }),
+    }).catch(function(){});
   }
 
   function submitNotify() {
-    var input = document.getElementById('notify-input');
-    var btn = document.getElementById('notify-btn');
+    var input   = document.getElementById('notify-input');
+    var btn     = document.getElementById('notify-btn');
+    var wrap    = document.getElementById('form-wrap');
     var success = document.getElementById('notify-success');
     var contact = input.value.trim();
-    if (!contact) return;
+    if (!contact) { input.focus(); return; }
     btn.disabled = true;
+    btn.textContent = '…';
     fetch('https://zbzhilbhkaizrxtdxpue.supabase.co/rest/v1/android_waitlist', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + CAPI_ANON_KEY,
-        'apikey': CAPI_ANON_KEY,
-        'Prefer': 'return=minimal',
-      },
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + CAPI_ANON_KEY, 'apikey': CAPI_ANON_KEY, 'Prefer': 'return=minimal' },
       body: JSON.stringify({ contact: contact }),
-    }).catch(function() {}).finally(function() {
-      input.style.display = 'none';
-      btn.style.display = 'none';
+    }).catch(function(){}).finally(function() {
+      wrap.style.display = 'none';
       success.style.display = 'block';
     });
   }
 
   var isAndroid = /android/i.test(navigator.userAgent);
-
   if (isAndroid) {
     document.getElementById('android-msg').style.display = 'block';
   } else {
     document.getElementById('ios-msg').style.display = 'block';
-
     var leadId = fbEventId();
     fbq('track', 'Lead', {}, { eventID: leadId });
     sendCapiEvent('Lead', leadId);
-
-    setTimeout(function() {
-      window.location.replace(IOS_URL);
-    }, 1000);
+    setTimeout(function() { window.location.replace(IOS_URL); }, 1000);
   }
   </script>
 </body>
