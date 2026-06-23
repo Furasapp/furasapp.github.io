@@ -115,6 +115,7 @@
     .notify-input:focus { border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.1); }
     .input-error { border-color: #f87171 !important; }
     .error-msg { font-size: 13px; color: #f87171; margin-bottom: 10px; }
+    .or-divider { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.35); text-align: center; margin-bottom: 10px; }
     .notify-btn {
       width: 100%;
       padding: 15px;
@@ -204,6 +205,7 @@
     <div id="form-wrap">
       <input class="notify-input" id="phone-input" type="tel" inputmode="tel" placeholder="Phone number (US) · رقم الهاتف" oninput="clearError()" />
       <div class="error-msg" id="phone-error" style="display:none"></div>
+      <div class="or-divider">or · أو</div>
       <input class="notify-input" id="email-input" type="email" placeholder="Email · البريد الإلكتروني" oninput="clearError()" />
       <div class="error-msg" id="email-error" style="display:none"></div>
       <button class="notify-btn" id="notify-btn" onclick="submitNotify()">Notify Me &nbsp;·&nbsp; أخبرني</button>
