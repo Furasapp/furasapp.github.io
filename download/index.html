@@ -194,16 +194,18 @@
     </div>
 
     <div class="title">Furas is on its way<br>to Android</div>
-    <div class="title-ar">فُرص قادمة على أندرويد</div>
+    <div class="title-ar">فُرص قادم على أندرويد</div>
 
     <div class="desc">We're almost there. Leave your phone number or email and we'll notify you the moment it launches.</div>
-    <div class="desc-ar">اتركنا رقمك أو بريدك وسنخبرك فور الإطلاق.</div>
+    <div class="desc-ar">اترك رقمك أو بريدك وسنخبرك فور الإطلاق.</div>
 
     <div class="form-label">Get notified · احصل على إشعار</div>
 
     <div id="form-wrap">
-      <input class="notify-input" id="notify-input" type="text" placeholder="Phone number or email" oninput="clearError()" />
-      <div class="error-msg" id="input-error" style="display:none"></div>
+      <input class="notify-input" id="phone-input" type="tel" inputmode="tel" placeholder="Phone number (US) · رقم الهاتف" oninput="clearError()" />
+      <div class="error-msg" id="phone-error" style="display:none"></div>
+      <input class="notify-input" id="email-input" type="email" placeholder="Email · البريد الإلكتروني" oninput="clearError()" />
+      <div class="error-msg" id="email-error" style="display:none"></div>
       <button class="notify-btn" id="notify-btn" onclick="submitNotify()">Notify Me &nbsp;·&nbsp; أخبرني</button>
     </div>
 
@@ -235,32 +237,66 @@
   }
 
   function clearError() {
-    var input = document.getElementById('notify-input');
-    var err   = document.getElementById('input-error');
-    input.classList.remove('input-error');
-    err.style.display = 'none';
+    ['phone-input', 'email-input'].forEach(function(id) {
+      document.getElementById(id).classList.remove('input-error');
+    });
+    ['phone-error', 'email-error'].forEach(function(id) {
+      var el = document.getElementById(id);
+      el.style.display = 'none';
+      el.textContent = '';
+    });
+  }
+
+  function showFieldError(inputId, errorId, message) {
+    document.getElementById(inputId).classList.add('input-error');
+    var err = document.getElementById(errorId);
+    err.textContent = message;
+    err.style.display = 'block';
+  }
+
+  function parseUSPhone(raw) {
+    if (raw.indexOf('+') === 0 && raw.indexOf('+1') !== 0) return null;
+    var digits = raw.replace(/\D/g, '');
+    if (digits.length === 11 && digits[0] === '1') digits = digits.slice(1);
+    if (digits.length !== 10 || /^[01]/.test(digits)) return null;
+    return digits;
   }
 
   function submitNotify() {
-    var input   = document.getElementById('notify-input');
-    var btn     = document.getElementById('notify-btn');
-    var wrap    = document.getElementById('form-wrap');
-    var success = document.getElementById('notify-success');
-    var err     = document.getElementById('input-error');
-    var contact = input.value.trim();
-    if (!contact) { input.focus(); return; }
+    var phoneInput = document.getElementById('phone-input');
+    var emailInput = document.getElementById('email-input');
+    var btn        = document.getElementById('notify-btn');
+    var wrap       = document.getElementById('form-wrap');
+    var success    = document.getElementById('notify-success');
 
-    // Phone validation: if no @ sign, treat as phone and check digit count
-    if (!contact.includes('@')) {
-      var digits = contact.replace(/\D/g, '');
-      if (digits.length < 10) {
-        input.classList.add('input-error');
-        err.textContent = 'Please enter a valid 10-digit phone number · أدخل رقماً صحيحاً مكوناً من 10 أرقام';
-        err.style.display = 'block';
-        input.focus();
+    clearError();
+
+    var phoneRaw = phoneInput.value.trim();
+    var email    = emailInput.value.trim();
+
+    if (!phoneRaw && !email) {
+      showFieldError('phone-input', 'phone-error', 'Please enter a phone number or email · أدخل رقم هاتف أو بريد إلكتروني');
+      phoneInput.focus();
+      return;
+    }
+
+    var usPhone = null;
+    if (phoneRaw) {
+      usPhone = parseUSPhone(phoneRaw);
+      if (!usPhone) {
+        showFieldError('phone-input', 'phone-error', 'Please enter a valid US phone number · أدخل رقم هاتف أمريكي صحيح');
+        phoneInput.focus();
         return;
       }
     }
+
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showFieldError('email-input', 'email-error', 'Please enter a valid email address · أدخل بريداً إلكترونياً صحيحاً');
+      emailInput.focus();
+      return;
+    }
+
+    var contact = [usPhone, email].filter(Boolean).join(', ');
 
     btn.disabled = true;
     btn.textContent = '…';
