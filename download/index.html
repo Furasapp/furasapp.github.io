@@ -197,13 +197,13 @@
     <div class="title">Furas is on its way<br>to Android</div>
     <div class="title-ar">فُرص قادم على أندرويد</div>
 
-    <div class="desc">We're almost there. Leave your phone number or email and we'll notify you the moment it launches.</div>
-    <div class="desc-ar">اترك رقمك أو بريدك وسنخبرك فور الإطلاق.</div>
+    <div class="desc">We're almost there. Leave your phone number and we'll notify you the moment it launches.</div>
+    <div class="desc-ar">اترك رقمك وسنخبرك فور الإطلاق.</div>
 
-    <div class="form-label">Get notified · احصل على إشعار</div>
+    <div class="form-label">Get notified by text · احصل على إشعار</div>
 
     <div id="form-wrap">
-      <input class="notify-input" id="contact-input" type="text" inputmode="text" placeholder="Phone or Email · هاتف أو بريد" oninput="clearError()" />
+      <input class="notify-input" id="contact-input" type="tel" inputmode="tel" placeholder="Phone number (US) · رقم الهاتف" oninput="clearError()" />
       <div class="error-msg" id="contact-error" style="display:none"></div>
       <button class="notify-btn" id="notify-btn" onclick="submitNotify()">Notify Me &nbsp;·&nbsp; أخبرني</button>
     </div>
@@ -270,28 +270,19 @@
     var raw = contactInput.value.trim();
 
     if (!raw) {
-      showFieldError('Please enter a phone number or email · أدخل رقم هاتف أو بريد إلكتروني');
+      showFieldError('Please enter your phone number · أدخل رقم هاتفك');
       contactInput.focus();
       return;
     }
 
-    var contact;
-    if (raw.indexOf('@') !== -1) {
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw)) {
-        showFieldError('Please enter a valid email address · أدخل بريداً إلكترونياً صحيحاً');
-        contactInput.focus();
-        return;
-      }
-      contact = raw;
-    } else {
-      var usPhone = parseUSPhone(raw);
-      if (!usPhone) {
-        showFieldError('Please enter a valid US phone number · أدخل رقم هاتف أمريكي صحيح');
-        contactInput.focus();
-        return;
-      }
-      contact = usPhone;
+    var usPhone = parseUSPhone(raw);
+    if (!usPhone) {
+      showFieldError('Please enter a valid US phone number · أدخل رقم هاتف أمريكي صحيح');
+      contactInput.focus();
+      return;
     }
+
+    var contact = usPhone;
 
     btn.disabled = true;
     btn.textContent = '…';
