@@ -115,7 +115,7 @@
     .notify-input:focus { border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.1); }
     .input-error { border-color: #f87171 !important; }
     .error-msg { font-size: 13px; color: #f87171; margin-bottom: 10px; }
-    .or-divider { font-size: 18px; font-weight: 700; color: rgba(255,255,255,0.45); text-align: center; margin-bottom: 12px; }
+
     .notify-btn {
       width: 100%;
       padding: 15px;
@@ -203,11 +203,8 @@
     <div class="form-label">Get notified · احصل على إشعار</div>
 
     <div id="form-wrap">
-      <input class="notify-input" id="phone-input" type="tel" inputmode="tel" placeholder="Phone number (US) · رقم الهاتف" oninput="clearError()" />
-      <div class="error-msg" id="phone-error" style="display:none"></div>
-      <div class="or-divider">Or · أو</div>
-      <input class="notify-input" id="email-input" type="email" placeholder="Email · البريد الإلكتروني" oninput="clearError()" />
-      <div class="error-msg" id="email-error" style="display:none"></div>
+      <input class="notify-input" id="contact-input" type="text" inputmode="text" placeholder="Phone or Email · هاتف أو بريد" oninput="clearError()" />
+      <div class="error-msg" id="contact-error" style="display:none"></div>
       <button class="notify-btn" id="notify-btn" onclick="submitNotify()">Notify Me &nbsp;·&nbsp; أخبرني</button>
     </div>
 
@@ -239,19 +236,17 @@
   }
 
   function clearError() {
-    ['phone-input', 'email-input'].forEach(function(id) {
-      document.getElementById(id).classList.remove('input-error');
-    });
-    ['phone-error', 'email-error'].forEach(function(id) {
-      var el = document.getElementById(id);
-      el.style.display = 'none';
-      el.textContent = '';
-    });
+    var input = document.getElementById('contact-input');
+    input.classList.remove('input-error');
+    var err = document.getElementById('contact-error');
+    err.style.display = 'none';
+    err.textContent = '';
   }
 
-  function showFieldError(inputId, errorId, message) {
-    document.getElementById(inputId).classList.add('input-error');
-    var err = document.getElementById(errorId);
+  function showFieldError(message) {
+    var input = document.getElementById('contact-input');
+    input.classList.add('input-error');
+    var err = document.getElementById('contact-error');
     err.textContent = message;
     err.style.display = 'block';
   }
@@ -265,40 +260,38 @@
   }
 
   function submitNotify() {
-    var phoneInput = document.getElementById('phone-input');
-    var emailInput = document.getElementById('email-input');
-    var btn        = document.getElementById('notify-btn');
-    var wrap       = document.getElementById('form-wrap');
-    var success    = document.getElementById('notify-success');
+    var contactInput = document.getElementById('contact-input');
+    var btn          = document.getElementById('notify-btn');
+    var wrap         = document.getElementById('form-wrap');
+    var success      = document.getElementById('notify-success');
 
     clearError();
 
-    var phoneRaw = phoneInput.value.trim();
-    var email    = emailInput.value.trim();
+    var raw = contactInput.value.trim();
 
-    if (!phoneRaw && !email) {
-      showFieldError('phone-input', 'phone-error', 'Please enter a phone number or email · أدخل رقم هاتف أو بريد إلكتروني');
-      phoneInput.focus();
+    if (!raw) {
+      showFieldError('Please enter a phone number or email · أدخل رقم هاتف أو بريد إلكتروني');
+      contactInput.focus();
       return;
     }
 
-    var usPhone = null;
-    if (phoneRaw) {
-      usPhone = parseUSPhone(phoneRaw);
-      if (!usPhone) {
-        showFieldError('phone-input', 'phone-error', 'Please enter a valid US phone number · أدخل رقم هاتف أمريكي صحيح');
-        phoneInput.focus();
+    var contact;
+    if (raw.indexOf('@') !== -1) {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw)) {
+        showFieldError('Please enter a valid email address · أدخل بريداً إلكترونياً صحيحاً');
+        contactInput.focus();
         return;
       }
+      contact = raw;
+    } else {
+      var usPhone = parseUSPhone(raw);
+      if (!usPhone) {
+        showFieldError('Please enter a valid US phone number · أدخل رقم هاتف أمريكي صحيح');
+        contactInput.focus();
+        return;
+      }
+      contact = usPhone;
     }
-
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      showFieldError('email-input', 'email-error', 'Please enter a valid email address · أدخل بريداً إلكترونياً صحيحاً');
-      emailInput.focus();
-      return;
-    }
-
-    var contact = [usPhone, email].filter(Boolean).join(', ');
 
     btn.disabled = true;
     btn.textContent = '…';
