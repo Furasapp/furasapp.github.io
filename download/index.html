@@ -49,18 +49,6 @@
       display: block;
     }
 
-    .badge-row {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 100px;
-      padding: 6px 14px;
-      margin-bottom: 20px;
-    }
-    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #f59e0b; }
-    .badge-text { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.8); letter-spacing: 0.5px; text-transform: uppercase; }
-
     .title {
       font-size: 28px;
       font-weight: 800;
@@ -89,78 +77,6 @@
       margin-bottom: 36px;
     }
 
-    /* ── Notify form ── */
-    .form-label {
-      font-size: 13px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.5);
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      margin-bottom: 10px;
-    }
-    .notify-input {
-      width: 100%;
-      padding: 15px 18px;
-      border-radius: 14px;
-      border: 1.5px solid rgba(255,255,255,0.15);
-      background: rgba(255,255,255,0.07);
-      color: #fff;
-      font-size: 16px;
-      font-family: inherit;
-      outline: none;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-    .notify-input::placeholder { color: rgba(255,255,255,0.3); }
-    .notify-input:focus { border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.1); }
-    .input-error { border-color: #f87171 !important; }
-    .error-msg { font-size: 13px; color: #f87171; margin-bottom: 10px; }
-
-    .notify-btn {
-      width: 100%;
-      padding: 15px;
-      border-radius: 14px;
-      border: none;
-      background: #fff;
-      color: #1b3d29;
-      font-size: 16px;
-      font-weight: 800;
-      font-family: inherit;
-      cursor: pointer;
-      transition: opacity 0.15s;
-    }
-    .notify-btn:hover { opacity: 0.92; }
-    .notify-btn:disabled { opacity: 0.5; cursor: default; }
-    .success-msg {
-      margin-top: 16px;
-      padding: 16px;
-      background: rgba(168,213,181,0.12);
-      border: 1px solid rgba(168,213,181,0.25);
-      border-radius: 14px;
-      color: #a8d5b5;
-      font-size: 15px;
-      font-weight: 600;
-      line-height: 1.6;
-    }
-
-    /* ── Footer link ── */
-    .footer-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 36px;
-      padding: 13px 24px;
-      border-radius: 14px;
-      border: none;
-      background: #1877F2;
-      color: #fff;
-      font-size: 15px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: opacity 0.15s;
-    }
-    .footer-link:hover { opacity: 0.9; }
-
     /* ── iOS redirect ── */
     .ios-wrap {
       color: rgba(255,255,255,0.7);
@@ -184,38 +100,16 @@
     </a>
   </div>
 
-  <!-- Android: coming soon page -->
+  <!-- Android: show Google Play button -->
   <div class="android-wrap" id="android-msg" style="display:none">
-
     <img class="app-icon" src="https://furasapp.com/icon.png" alt="Furas" onerror="this.style.display='none'" />
-
-    <div class="badge-row">
-      <div class="badge-dot"></div>
-      <span class="badge-text">Coming Soon on Android</span>
-    </div>
-
-    <div class="title">Furas is on its way<br>to Android</div>
-    <div class="title-ar">فُرص قادم على أندرويد</div>
-
-    <div class="desc">We're almost there. Leave your phone number and we'll notify you the moment it launches.</div>
-    <div class="desc-ar">اترك رقمك وسنخبرك فور الإطلاق.</div>
-
-    <div class="form-label">Get notified by text · احصل على إشعار</div>
-
-    <div id="form-wrap">
-      <input class="notify-input" id="contact-input" type="tel" inputmode="tel" placeholder="Phone number (US) · رقم الهاتف" oninput="clearError()" />
-      <div class="error-msg" id="contact-error" style="display:none"></div>
-      <button class="notify-btn" id="notify-btn" onclick="submitNotify()">Notify Me &nbsp;·&nbsp; أخبرني</button>
-    </div>
-
-    <div class="success-msg" id="notify-success" style="display:none">
-      ✓ You're on the list!<br>
-      <span style="direction:rtl;display:block">تمام! سنخبرك عند الإطلاق.</span>
-    </div>
-
-    <a class="footer-link" href="https://www.facebook.com/share/1Db6tE1n94/?mibextid=wwXIfr" target="_blank" rel="noopener">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-      Follow us on Facebook · تابعونا على فيسبوك
+    <div class="title">Download Furas</div>
+    <div class="title-ar">حمّل فُرص</div>
+    <div class="desc">Find jobs at Arab & Yemeni-owned businesses near you.</div>
+    <div class="desc-ar" style="margin-bottom:28px">ابحث عن عمل في محلات يمنية وعربية قريبة منك.</div>
+    <a href="https://play.google.com/store/apps/details?id=com.yourname.localhire" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px;border-radius:14px;background:#fff;color:#1b3d29;font-size:16px;font-weight:800;text-decoration:none;font-family:inherit;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3.18 23.76c.3.16.64.19.96.09l.09-.06 11.07-6.37-2.38-2.38-9.74 8.72z" fill="#EA4335"/><path d="M18.66 14.32L16.2 12.9l2.49-2.49 2.43 1.39c.69.4.69 1.04 0 1.44l-2.46 1.08z" fill="#FBBC04"/><path d="M3.02.28C2.72.45 2.5.79 2.5 1.23v21.54c0 .43.22.77.52.94l.09.05 12.05-12.05L3.02.28z" fill="#4285F4"/><path d="M15.26 11.61L4.17.59l10.99 6.34-2.38 2.38 2.48 2.3z" fill="#34A853"/></svg>
+      Get it on Google Play
     </a>
   </div>
 
@@ -223,6 +117,7 @@
   const CAPI_FN_URL  = 'https://zbzhilbhkaizrxtdxpue.supabase.co/functions/v1/meta-capi-event';
   const CAPI_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpiemhpbGJoa2FpenJ4dGR4cHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MzMxODIsImV4cCI6MjA5NDEwOTE4Mn0.Y4RxP1vOifP6T_Qj64JvpmUho1A1nSyJqy-lBc1EH4o';
   const IOS_URL       = 'https://apps.apple.com/us/app/furas-%D9%81-%D8%B1%D8%B5/id6769409699';
+  const ANDROID_URL   = 'https://play.google.com/store/apps/details?id=com.yourname.localhire';
 
   function fbEventId() { return 'evt_' + Date.now() + '_' + Math.random().toString(36).slice(2); }
   function getCookie(n) { var m = document.cookie.match('(^|;)\\s*' + n + '\\s*=\\s*([^;]+)'); return m ? m.pop() : ''; }
@@ -235,72 +130,15 @@
     }).catch(function(){});
   }
 
-  function clearError() {
-    var input = document.getElementById('contact-input');
-    input.classList.remove('input-error');
-    var err = document.getElementById('contact-error');
-    err.style.display = 'none';
-    err.textContent = '';
-  }
-
-  function showFieldError(message) {
-    var input = document.getElementById('contact-input');
-    input.classList.add('input-error');
-    var err = document.getElementById('contact-error');
-    err.textContent = message;
-    err.style.display = 'block';
-  }
-
-  function parseUSPhone(raw) {
-    if (raw.indexOf('+') === 0 && raw.indexOf('+1') !== 0) return null;
-    var digits = raw.replace(/\D/g, '');
-    if (digits.length === 11 && digits[0] === '1') digits = digits.slice(1);
-    if (digits.length !== 10 || /^[01]/.test(digits)) return null;
-    return digits;
-  }
-
-  function submitNotify() {
-    var contactInput = document.getElementById('contact-input');
-    var btn          = document.getElementById('notify-btn');
-    var wrap         = document.getElementById('form-wrap');
-    var success      = document.getElementById('notify-success');
-
-    clearError();
-
-    var raw = contactInput.value.trim();
-
-    if (!raw) {
-      showFieldError('Please enter your phone number · أدخل رقم هاتفك');
-      contactInput.focus();
-      return;
-    }
-
-    var usPhone = parseUSPhone(raw);
-    if (!usPhone) {
-      showFieldError('Please enter a valid US phone number · أدخل رقم هاتف أمريكي صحيح');
-      contactInput.focus();
-      return;
-    }
-
-    var contact = usPhone;
-
-    btn.disabled = true;
-    btn.textContent = '…';
-    fetch('https://zbzhilbhkaizrxtdxpue.supabase.co/rest/v1/android_waitlist', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + CAPI_ANON_KEY, 'apikey': CAPI_ANON_KEY, 'Prefer': 'return=minimal' },
-      body: JSON.stringify({ contact: contact }),
-    }).catch(function(){}).finally(function() {
-      wrap.style.display = 'none';
-      success.style.display = 'block';
-    });
-  }
-
   var isAndroid = /android/i.test(navigator.userAgent);
   var fromHome  = window.location.search.indexOf('ref=home') !== -1;
 
   if (isAndroid || fromHome) {
     document.getElementById('android-msg').style.display = 'block';
+    var androidLeadId = fbEventId();
+    fbq('track', 'Lead', {}, { eventID: androidLeadId });
+    sendCapiEvent('Lead', androidLeadId);
+    setTimeout(function() { window.location.replace(ANDROID_URL); }, 1000);
   } else {
     document.getElementById('ios-msg').style.display = 'block';
     var leadId = fbEventId();
