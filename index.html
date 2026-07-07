@@ -255,14 +255,13 @@ const viewEventId = fbEventId();
 fbq('track', 'ViewContent', {}, { eventID: viewEventId });
 sendCapiEvent('ViewContent', viewEventId);
 
-const appStoreBadge = document.querySelector('.badge-apple');
-if (appStoreBadge) {
-  appStoreBadge.addEventListener('click', function() {
+document.querySelectorAll('.badge').forEach(function(badge) {
+  badge.addEventListener('click', function() {
     const leadEventId = fbEventId();
     fbq('track', 'Lead', {}, { eventID: leadEventId });
     sendCapiEvent('Lead', leadEventId);
   });
-}
+});
 </script>
 
 </body>
