@@ -83,6 +83,43 @@
       font-size: 17px;
       text-align: center;
     }
+
+    /* ── Store badges (matches furasapp.com homepage) ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #000;
+      border: 1.5px solid transparent;
+      color: #fff;
+      text-decoration: none;
+      padding: 16px 24px;
+      border-radius: 13px;
+      transition: opacity 0.2s;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 0 1.5px rgba(255,255,255,0.15), 0 0 12px 2px rgba(255,255,255,0.08);
+      font-family: inherit;
+    }
+    .badge:hover { opacity: 0.82; }
+    .badge-icon { width: 30px; height: 30px; flex-shrink: 0; }
+    .badge-text { display: flex; flex-direction: column; text-align: left; }
+    .badge-line1 { font-size: 12px; opacity: 0.75; line-height: 1.2; }
+    .badge-line2 { font-size: 20px; font-weight: 700; line-height: 1.3; }
+    .badge::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.18) 50%, transparent 60%);
+      background-size: 200% auto;
+      animation: shine 2.8s linear infinite;
+      pointer-events: none;
+      border-radius: 13px;
+    }
+    @keyframes shine {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
   </style>
 </head>
 <body>
@@ -94,9 +131,12 @@
     <div class="title-ar">حمّل فُرص</div>
     <div class="desc">Find jobs at Arab & Yemeni-owned businesses near you.</div>
     <div class="desc-ar" style="margin-bottom:28px">ابحث عن عمل في محلات يمنية وعربية قريبة منك.</div>
-    <a id="ios-link" href="https://apps.apple.com/us/app/furas-%D9%81-%D8%B1%D8%B5/id6769409699" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px;border-radius:14px;background:#fff;color:#1b3d29;font-size:16px;font-weight:800;text-decoration:none;font-family:inherit;">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="#1b3d29"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-      Download on the App Store
+    <a id="ios-link" class="badge" href="https://apps.apple.com/us/app/furas-%D9%81-%D8%B1%D8%B5/id6769409699">
+      <svg class="badge-icon" viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      <div class="badge-text">
+        <span class="badge-line1">Download on the</span>
+        <span class="badge-line2">App Store</span>
+      </div>
     </a>
   </div>
 
@@ -107,9 +147,12 @@
     <div class="title-ar">حمّل فُرص</div>
     <div class="desc">Find jobs at Arab & Yemeni-owned businesses near you.</div>
     <div class="desc-ar" style="margin-bottom:28px">ابحث عن عمل في محلات يمنية وعربية قريبة منك.</div>
-    <a id="android-link" href="https://play.google.com/store/apps/details?id=com.yourname.localhire" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px;border-radius:14px;background:#fff;color:#1b3d29;font-size:16px;font-weight:800;text-decoration:none;font-family:inherit;">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3.18 23.76c.3.16.64.19.96.09l.09-.06 11.07-6.37-2.38-2.38-9.74 8.72z" fill="#EA4335"/><path d="M18.66 14.32L16.2 12.9l2.49-2.49 2.43 1.39c.69.4.69 1.04 0 1.44l-2.46 1.08z" fill="#FBBC04"/><path d="M3.02.28C2.72.45 2.5.79 2.5 1.23v21.54c0 .43.22.77.52.94l.09.05 12.05-12.05L3.02.28z" fill="#4285F4"/><path d="M15.26 11.61L4.17.59l10.99 6.34-2.38 2.38 2.48 2.3z" fill="#34A853"/></svg>
-      Get it on Google Play
+    <a id="android-link" class="badge" href="https://play.google.com/store/apps/details?id=com.yourname.localhire">
+      <svg class="badge-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.18 23.76c.3.16.64.19.96.09l.09-.06 11.07-6.37-2.38-2.38-9.74 8.72z" fill="#EA4335"/><path d="M18.66 14.32L16.2 12.9l2.49-2.49 2.43 1.39c.69.4.69 1.04 0 1.44l-2.46 1.08z" fill="#FBBC04"/><path d="M3.02.28C2.72.45 2.5.79 2.5 1.23v21.54c0 .43.22.77.52.94l.09.05 12.05-12.05L3.02.28z" fill="#4285F4"/><path d="M15.26 11.61L4.17.59l10.99 6.34-2.38 2.38 2.48 2.3z" fill="#34A853"/></svg>
+      <div class="badge-text">
+        <span class="badge-line1">Get it on</span>
+        <span class="badge-line2">Google Play</span>
+      </div>
     </a>
   </div>
 
