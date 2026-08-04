@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Furas Admin Workspace</title>
+  <link rel="stylesheet" href="admin.css?v=1">
+</head>
+<body>
+  <section id="login-view" class="login-shell">
+    <form id="phone-form" class="login-card">
+      <div class="login-mark">F</div>
+      <h1>Furas Admin</h1>
+      <p>Sign in with the administrator phone number. Access is checked again by the database.</p>
+      <label for="phone">Phone number</label>
+      <div class="phone-field"><span>+1</span><input id="phone" inputmode="numeric" autocomplete="tel" maxlength="14" placeholder="(555) 555-5555" required></div>
+      <div id="recaptcha-container"></div>
+      <button id="send-code" type="submit">Send verification code</button>
+      <p id="login-error" class="form-error" role="alert"></p>
+    </form>
+    <form id="code-form" class="login-card hidden">
+      <div class="login-mark">F</div>
+      <h1>Enter code</h1>
+      <p>Enter the 6-digit verification code sent to <strong id="phone-display"></strong>.</p>
+      <label for="code">Verification code</label>
+      <input id="code" class="code-field" inputmode="numeric" autocomplete="one-time-code" maxlength="6" required>
+      <button id="verify-code" type="submit">Verify and open dashboard</button>
+      <button id="change-phone" class="text-button" type="button">Use a different number</button>
+      <p id="code-error" class="form-error" role="alert"></p>
+    </form>
+  </section>
+
+  <div id="dashboard-view" class="app hidden">
+    <aside class="side">
+      <div class="brand">Furas<small>Admin workspace</small></div>
+      <nav class="nav">
+        <button class="nav-item on" data-view="overview">Safety overview</button>
+        <button class="nav-item" data-view="queue">Review queue <span id="queue-badge" class="count hidden">0</span></button>
+        <button class="nav-item" data-view="insights">Job insights</button>
+        <button class="nav-item" data-view="chat">Chat trends</button>
+        <button class="nav-item" data-view="reports">User reports</button>
+        <button class="nav-item" data-view="health">Screening health</button>
+      </nav>
+      <div class="privacy">Raw conversations stay hidden. This workspace receives structured safety signals, not copied chat text.</div>
+    </aside>
+
+    <main class="main">
+      <header class="header">
+        <div><h1 id="page-title">Safety & Insights</h1><div id="updated-at" class="sub">Loading…</div></div>
+        <div class="header-actions"><button id="refresh" class="icon-button" title="Refresh">↻</button><button id="sign-out" class="admin"><span class="avatar">M</span><span>Sign out</span></button></div>
+      </header>
+
+      <div id="global-error" class="error-banner hidden" role="alert"></div>
+      <div id="loading" class="loading"><span class="spinner"></span>Loading secured dashboard…</div>
+
+      <div id="content" class="hidden">
+        <section id="view-overview" class="panel-view">
+          <div class="stats">
+            <article class="card"><div class="stat-label">Jobs screened · 7 days</div><div id="jobs-screened" class="stat-value">0</div><div id="screened-detail" class="delta">—</div></article>
+            <article class="card"><div class="stat-label">Needs review</div><div id="needs-review" class="stat-value warning">0</div><div id="review-detail" class="delta warning">—</div></article>
+            <article class="card"><div class="stat-label">Chat safety signals · 7 days</div><div id="chat-signal-count" class="stat-value">0</div><div class="delta">No raw text duplicated</div></article>
+            <article class="card"><div class="stat-label">Open user reports</div><div id="open-report-count" class="stat-value danger">0</div><div class="delta warning">User-submitted and automatic</div></article>
+          </div>
+          <div class="layout">
+            <div>
+              <section class="section"><div class="section-head"><h2>Priority review queue</h2><button class="section-link" data-go="queue">View all</button></div><div id="priority-queue"></div></section>
+              <section class="section"><div class="section-head"><h2>Most common job needs</h2><span>Structured listing insights</span></div><div id="job-needs" class="bars"></div></section>
+            </div>
+            <div>
+              <section class="section"><div class="section-head"><h2>Product opportunities</h2><span>Evidence-based</span></div><div id="opportunities"></div></section>
+              <section class="section"><div class="section-head"><h2>Screening health</h2><span>Observation mode</span></div><div id="health-summary"></div></section>
+              <div class="notice">No automatic enforcement: safety results support human review. Listings and accounts are not removed solely by rules or AI.</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-queue" class="panel-view hidden"><div class="section"><div class="section-head"><h2>Job review queue</h2><div class="filters"><button class="filter on" data-risk="all">All</button><button class="filter" data-risk="high">High</button><button class="filter" data-risk="medium">Medium</button></div></div><div id="full-queue"></div></div></section>
+        <section id="view-insights" class="panel-view hidden"><div class="two-col"><div class="section"><div class="section-head"><h2>Job types</h2><span>All completed screens</span></div><div id="job-type-insights" class="bars"></div></div><div class="section"><div class="section-head"><h2>Listing completeness</h2></div><div id="completeness"></div></div></div></section>
+        <section id="view-chat" class="panel-view hidden"><div class="section"><div class="section-head"><h2>Chat safety categories</h2><span>Structured signals only</span></div><div id="chat-trends" class="bars"></div></div><div class="notice">Raw message bodies are not stored in this dashboard’s safety-signal table. Use the existing authorized conversation review only when a serious signal or user report requires context.</div></section>
+        <section id="view-reports" class="panel-view hidden"><div class="section"><div class="section-head"><h2>Open user reports</h2><span>Newest first</span></div><div id="reports-list"></div></div></section>
+        <section id="view-health" class="panel-view hidden"><div class="two-col"><div class="section"><div class="section-head"><h2>Provider usage</h2></div><div id="provider-health" class="bars"></div></div><div class="section"><div class="section-head"><h2>Processing status</h2></div><div id="status-health" class="bars"></div></div></div></section>
+      </div>
+    </main>
+  </div>
+  <script type="module" src="admin.js?v=1"></script>
+</body>
+</html>
