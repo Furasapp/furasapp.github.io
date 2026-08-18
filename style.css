@@ -244,6 +244,38 @@ body.rtl .badge-text { text-align: right; }
   border-radius: 13px;
 }
 
+/* SCREENSHOTS */
+.screenshots-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--green);
+  padding: 8px 20px 0;
+}
+.screenshots {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 20px 12px;
+  display: flex;
+  direction: ltr;
+  gap: 18px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.screenshots img {
+  scroll-snap-align: start;
+  height: 460px;
+  width: auto;
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  flex-shrink: 0;
+  display: block;
+}
+@media (max-width: 700px) {
+  .screenshots img { height: 360px; }
+}
+
 /* FEATURES */
 .features {
   max-width: 960px;
