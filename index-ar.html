@@ -114,10 +114,18 @@
 
 <h2 class="screenshots-title" data-i18n="screenshotsTitle">شاهد فُرص وهو يعمل</h2>
 <section class="screenshots">
-  <img src="screenshots/shot-map-ar.jpg" width="600" height="1298" loading="lazy" alt="خريطة الأعمال في تطبيق فُرص" />
-  <img src="screenshots/shot-browse-ar.jpg" width="600" height="1298" loading="lazy" alt="تصفح الأعمال في محلات يمنية وعربية داخل تطبيق فُرص" />
-  <img src="screenshots/shot-post-ar.jpg" width="600" height="1298" loading="lazy" alt="نشر عمل كصاحب محل داخل تطبيق فُرص" />
-  <img src="screenshots/shot-detail-ar.jpg" width="600" height="1298" loading="lazy" alt="تفاصيل العمل مع خيارات الاتصال المباشر وواتساب والمراسلة" />
+  <a class="screenshot-link" href="https://furas.onelink.me/WweV/8puqmdpc?pid=website&c=homepage_screenshot" target="_blank" rel="noopener">
+    <img src="screenshots/shot-map-ar.jpg" width="600" height="1298" loading="lazy" alt="خريطة الأعمال في تطبيق فُرص" />
+  </a>
+  <a class="screenshot-link" href="https://furas.onelink.me/WweV/8puqmdpc?pid=website&c=homepage_screenshot" target="_blank" rel="noopener">
+    <img src="screenshots/shot-browse-ar.jpg" width="600" height="1298" loading="lazy" alt="تصفح الأعمال في محلات يمنية وعربية داخل تطبيق فُرص" />
+  </a>
+  <a class="screenshot-link" href="https://furas.onelink.me/WweV/8puqmdpc?pid=website&c=homepage_screenshot" target="_blank" rel="noopener">
+    <img src="screenshots/shot-post-ar.jpg" width="600" height="1298" loading="lazy" alt="نشر عمل كصاحب محل داخل تطبيق فُرص" />
+  </a>
+  <a class="screenshot-link" href="https://furas.onelink.me/WweV/8puqmdpc?pid=website&c=homepage_screenshot" target="_blank" rel="noopener">
+    <img src="screenshots/shot-detail-ar.jpg" width="600" height="1298" loading="lazy" alt="تفاصيل العمل مع خيارات الاتصال المباشر وواتساب والمراسلة" />
+  </a>
 </section>
 
 <section class="features">
@@ -298,7 +306,7 @@ const viewEventId = fbEventId();
 fbq('track', 'ViewContent', {}, { eventID: viewEventId });
 sendCapiEvent('ViewContent', viewEventId);
 
-document.querySelectorAll('.badge').forEach(function(badge) {
+document.querySelectorAll('.badge, .screenshot-link').forEach(function(badge) {
   badge.addEventListener('click', function() {
     const leadEventId = fbEventId();
     fbq('track', 'Lead', {}, { eventID: leadEventId });
